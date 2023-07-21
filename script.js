@@ -19,6 +19,10 @@ async function searchImages() {
     console.log(data);
     const value = data.results;
 
+    if (page === 1) {
+        searchResult.innerHTML = ''
+    }
+
     value.map((val) => {
         const image = document.createElement('img')
         image.src = val.urls.small;
@@ -29,10 +33,16 @@ async function searchImages() {
         imageLink.appendChild(image)
         searchResult.appendChild(imageLink)
     })
+    showMoreBtn.style.display = 'block'
 }
 
 searchFrom.addEventListener('submit', (event) => {
     event.preventDefault()
     page = 1;
+    searchImages()
+})
+
+showMoreBtn.addEventListener('click', () => {
+    page++;
     searchImages()
 })
