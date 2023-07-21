@@ -17,6 +17,18 @@ async function searchImages() {
     const response = await fetch(url)
     const data = await response.json()
     console.log(data);
+    const value = data.results;
+
+    value.map((val) => {
+        const image = document.createElement('img')
+        image.src = val.urls.small;
+        const imageLink = document.createElement('a')
+        imageLink.href = val.links.html
+        imageLink.target = '_blank'
+
+        imageLink.appendChild(image)
+        searchResult.appendChild(imageLink)
+    })
 }
 
 searchFrom.addEventListener('submit', (event) => {
